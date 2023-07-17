@@ -21,6 +21,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -44,7 +45,7 @@ class MainActivity : ComponentActivity() {
 fun MyApp(
     modifier: Modifier = Modifier,
 ) {
-    var shouldShowOnBoarding by remember { mutableStateOf(true) }
+    var shouldShowOnBoarding by rememberSaveable { mutableStateOf(true) }
 
     Surface(
         modifier = modifier,
@@ -63,11 +64,11 @@ fun MyApp(
 @Composable
 fun Greetings(
     modifier: Modifier = Modifier,
-    names: List<String> = List(1000) { "$it"}
+    names: List<String> = List(1000) { "$it" }
 ) {
-    
+
     LazyColumn(modifier = modifier.padding(vertical = 4.dp)) {
-        items(names) {name -> 
+        items(names) { name ->
             Greeting(name = name)
         }
     }
