@@ -1,5 +1,6 @@
 package com.samentic.hellocompose
 
+import android.content.res.Configuration
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -27,6 +28,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.samentic.hellocompose.ui.theme.HelloComposeTheme
 
@@ -93,7 +96,13 @@ fun Greeting(name: String) {
                     .padding(bottom = extraPadding)
             ) {
                 Text(text = "Hello, ", modifier = Modifier.fillMaxWidth())
-                Text(text = "$name!", modifier = Modifier.fillMaxWidth())
+                Text(
+                    text = "$name!",
+                    modifier = Modifier.fillMaxWidth(),
+                    style = MaterialTheme.typography.headlineMedium.copy(
+                        fontWeight = FontWeight.ExtraBold
+                    )
+                )
             }
             ElevatedButton(onClick = { isExpanded = !isExpanded }) {
                 Text(text = if (isExpanded) "Show less" else "ShowMore")
@@ -123,18 +132,22 @@ fun OnBoardingScreen(
 }
 
 // Why the fuck colors are different with runtime?
-//@Preview(widthDp = 320)
-//@Preview(
-//    name = "DarkPreview",
-//    uiMode = Configuration.UI_MODE_NIGHT_YES,
-//    widthDp = 320
-//)
-//@Composable
-//fun GreetingPreview() {
-//    HelloComposeTheme {
-//        Greetings()
-//    }
-//}
+@Preview(
+    widthDp = 320,
+    showBackground = true,
+)
+@Preview(
+    name = "DarkPreview",
+    uiMode = Configuration.UI_MODE_NIGHT_YES,
+    showBackground = true,
+    widthDp = 320
+)
+@Composable
+fun GreetingPreview() {
+    HelloComposeTheme(dynamicColor = false) {
+        Greetings()
+    }
+}
 
 //@Preview(showBackground = true, widthDp = 320, heightDp = 320, name = "sss")
 //@Composable
