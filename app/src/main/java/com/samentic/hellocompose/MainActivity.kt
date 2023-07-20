@@ -38,6 +38,7 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -47,6 +48,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -55,6 +57,7 @@ import com.samentic.hellocompose.ui.theme.HelloComposeTheme
 import java.util.Locale
 
 class MainActivity : ComponentActivity() {
+    @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -242,7 +245,7 @@ private fun SootheBottomNavigation(modifier: Modifier = Modifier) {
     ) {
         NavigationBarItem(
             selected = true,
-            onClick = {  },
+            onClick = { },
             icon = {
                 Icon(
                     imageVector = Icons.Default.Spa,
@@ -255,7 +258,7 @@ private fun SootheBottomNavigation(modifier: Modifier = Modifier) {
         )
         NavigationBarItem(
             selected = false,
-            onClick = {  },
+            onClick = { },
             icon = {
                 Icon(
                     imageVector = Icons.Default.AccountCircle,
@@ -270,9 +273,14 @@ private fun SootheBottomNavigation(modifier: Modifier = Modifier) {
 }
 
 // Step: MySoothe App - Scaffold
+@ExperimentalMaterial3Api
 @Composable
 fun MySootheApp() {
-    // Implement composable here
+    HelloComposeTheme {
+        Scaffold(bottomBar = { SootheBottomNavigation() }) { padding ->
+            HomeScreen(modifier = Modifier.padding(padding))
+        }
+    }
 }
 
 private val alignYourBodyData = listOf(
@@ -363,6 +371,7 @@ fun BottomNavigationPreview() {
     HelloComposeTheme(dynamicColor = false) { SootheBottomNavigation(Modifier.padding(top = 24.dp)) }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Preview(widthDp = 360, heightDp = 640)
 @Composable
 fun MySoothePreview() {
