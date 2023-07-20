@@ -6,8 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -32,7 +30,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountCircle
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material.icons.filled.Spa
-import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -48,7 +45,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
@@ -224,15 +220,15 @@ fun HomeScreen(modifier: Modifier = Modifier) {
         modifier = modifier.verticalScroll(rememberScrollState())
 //            .padding(16.dp)
     ) {
-        Spacer(modifier = modifier.height(16.dp))
-        SearchBar(modifier = modifier.padding(horizontal = 16.dp))
+        Spacer(modifier = Modifier.height(16.dp))
+        SearchBar(modifier = Modifier.padding(horizontal = 16.dp))
         HomeSection(title = R.string.align_your_body) {
             AlignYourBodyRow()
         }
         HomeSection(title = R.string.favorite_collections) {
             FavoriteCollectionsGrid()
         }
-        Spacer(modifier = modifier.height(16.dp))
+        Spacer(modifier = Modifier.height(16.dp))
     }
 }
 
@@ -248,7 +244,7 @@ private fun SootheBottomNavigation(modifier: Modifier = Modifier) {
             onClick = { },
             icon = {
                 Icon(
-                    imageVector = Icons.Default.Spa,
+                    imageVector = Icons.Filled.Spa,
                     contentDescription = null
                 )
             },
