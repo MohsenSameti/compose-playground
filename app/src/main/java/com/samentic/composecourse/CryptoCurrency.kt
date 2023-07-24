@@ -10,5 +10,6 @@ data class CryptoCurrency(
     val time: String?,
     val jDate: String?,
     val price: Double?,
-    val chg24h: Double?
+    val chg24h: Double?,
+    val symbol: String?
 )
