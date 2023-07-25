@@ -7,6 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.height
@@ -45,7 +46,10 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             ComposeCourseTheme {
-                LazyColumn {
+                LazyColumn(
+                    contentPadding = PaddingValues(vertical = 16.dp, horizontal = 8.dp),
+                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                ) {
                     items(
                         items = Data.getCrypto(),
                         key = { it.id }
@@ -65,7 +69,7 @@ fun CryptoCurrencyItem(crypto: CryptoCurrency, modifier: Modifier = Modifier) {
     Surface(
         shape = MaterialTheme.shapes.medium,
         color = Color.LightGray,
-        modifier = modifier.padding(horizontal = 8.dp, vertical = 4.dp)
+        modifier = modifier
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
