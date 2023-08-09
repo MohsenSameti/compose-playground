@@ -65,18 +65,25 @@ fun Composable4() {
 
 @Composable
 fun Composable5() {
-    Composable7()
-    Composable8()
+
+    Text("Composable 5", Modifier.background(LocalColor.current))
+
+    CompositionLocalProvider(LocalColor provides Color.Green) {
+        Composable7()
+    }
+    CompositionLocalProvider(LocalColor provides Color.Yellow) {
+        Composable8()
+    }
 }
 
 @Composable
 fun Composable6() {
-    Text(text = "Composable 6")
+    Text(text = "Composable 6", modifier = Modifier.background(LocalColor.current))
 }
 
 @Composable
 fun Composable7() {
-
+    Text("Composable 7", modifier = Modifier.background(LocalColor.current))
 }
 
 @Composable
