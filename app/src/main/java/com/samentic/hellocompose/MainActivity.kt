@@ -7,10 +7,13 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextIndent
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
@@ -32,6 +35,7 @@ class MainActivity : ComponentActivity() {
 fun MainScreen() {
     Column {
         SpanString()
+        ParaString()
     }
 }
 
@@ -57,6 +61,34 @@ fun SpanString() {
                 )
             ) {
                 append("great!")
+            }
+        }
+    )
+}
+
+@Composable
+fun ParaString() {
+    Text(
+        buildAnnotatedString {
+            append("\nThis is some text that doesn't have any style applied to it.\n")
+
+            withStyle(
+                style = ParagraphStyle(
+                    lineHeight = 30.sp,
+                    textIndent = TextIndent(
+                        firstLine = 60.sp,
+                        restLine = 25.sp
+                    )
+                )
+            ) {
+                append(
+                    "This is some Text that is indented more on the first line than the" +
+                            "rest of the lines. It also jas increased line Height.\n"
+                )
+            }
+
+            withStyle(style = ParagraphStyle(textAlign = TextAlign.End)) {
+                append("This is some text that is right aligned.")
             }
         }
     )
