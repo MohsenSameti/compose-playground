@@ -6,7 +6,9 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.ExperimentalTextApi
 import androidx.compose.ui.text.ParagraphStyle
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -36,6 +38,7 @@ fun MainScreen() {
     Column {
         SpanString()
         ParaString()
+        BrushStyle()
     }
 }
 
@@ -89,6 +92,33 @@ fun ParaString() {
 
             withStyle(style = ParagraphStyle(textAlign = TextAlign.End)) {
                 append("This is some text that is right aligned.")
+            }
+        }
+    )
+}
+
+@OptIn(ExperimentalTextApi::class)
+@Composable
+fun BrushStyle() {
+    val colorList: List<Color> = listOf(
+        Color.Red,
+        Color.Blue,
+        Color.Magenta,
+        Color.Yellow,
+        Color.Green,
+        Color.Red
+    )
+
+    Text(
+        text = buildAnnotatedString {
+            withStyle(
+                style = SpanStyle(
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 70.sp,
+                    brush = Brush.linearGradient(colors = colorList)
+                )
+            ) {
+                append("COMPOSE!")
             }
         }
     )
