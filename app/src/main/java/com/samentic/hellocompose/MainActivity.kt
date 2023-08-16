@@ -53,7 +53,16 @@ fun SpanString() {
             }
 
             withStyle(style = SpanStyle(color = Color.Gray)) {
+                val currentSize = length
                 append("his")
+                addStyle(
+                    style = SpanStyle(
+                        color = Color.Cyan,
+                        fontSize = 18.sp
+                    ),
+                    start =  currentSize + 1,
+                    end = currentSize + 2
+                )
             }
             append(" is ")
             withStyle(
@@ -115,7 +124,7 @@ fun BrushStyle() {
                 style = SpanStyle(
                     fontWeight = FontWeight.Bold,
                     fontSize = 70.sp,
-                    brush = Brush.linearGradient(colors = colorList)
+                    brush = Brush.horizontalGradient(colorList)
                 )
             ) {
                 append("COMPOSE!")
