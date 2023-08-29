@@ -5,11 +5,15 @@ package com.samentic.hellocompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -23,11 +27,16 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.rotate
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.samentic.hellocompose.ui.theme.HelloComposeTheme
 
+enum class BoxColor {
+    Red,
+    Magenta
+}
 
 @Suppress("AnimateAsStateLabel")
 class MainActivity : ComponentActivity() {
@@ -72,10 +81,55 @@ fun RotationDemo() {
     }
 }
 
-@Preview(showBackground = true, showSystemUi = true)
+@Composable
+fun ColorChangeDemo() {
+    var colorState by remember { mutableStateOf(BoxColor.Red) }
+
+    val animatedColor: Color by animateColorAsState(
+        targetValue = when (colorState) {
+            BoxColor.Red -> Color.Magenta
+            BoxColor.Magenta -> Color.Red
+        },
+        animationSpec = tween(4500)
+    )
+
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Box(
+            modifier = Modifier
+                .padding(20.dp)
+                .size(200.dp)
+                .background(animatedColor)
+        )
+
+        Button(
+            onClick = {
+                colorState = when (colorState) {
+                    BoxColor.Red -> BoxColor.Magenta
+                    BoxColor.Magenta -> BoxColor.Red
+                }
+            },
+            modifier = Modifier.padding(10.dp)
+        ) {
+            Text(text = "Change Color")
+        }
+    }
+}
+
+@Preview(showBackground = true)
 @Composable
 fun RotateDemoPreview() {
     HelloComposeTheme {
         RotationDemo()
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ColorChangeDemoPreview() {
+    HelloComposeTheme {
+        ColorChangeDemo()
     }
 }
