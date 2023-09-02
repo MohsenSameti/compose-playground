@@ -5,16 +5,19 @@ package com.samentic.hellocompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.animation.animateColor
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearEasing
 import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.animateDp
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.keyframes
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.core.updateTransition
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -60,7 +63,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             HelloComposeTheme {
-                MotionDemo()
+                TransitionDemo()
             }
         }
     }
@@ -148,13 +151,14 @@ fun MotionDemo() {
         },
         animationSpec = keyframes {
             durationMillis = 1000
-            when(boxState) {
+            when (boxState) {
                 BoxPosition.End -> {
                     20.dp.at(10).with(LinearEasing)
                     100.dp.at(100).with(LinearEasing)
                     110.dp.at(500).with(FastOutSlowInEasing)
                     200.dp.at(700).with(LinearOutSlowInEasing)
                 }
+
                 BoxPosition.Start -> {
                     200.dp.at(10).with(FastOutSlowInEasing)
                     110.dp.at(100).with(LinearOutSlowInEasing)
@@ -188,6 +192,68 @@ fun MotionDemo() {
         ) {
             Text(text = "Move Box")
         }
+    }
+}
+
+@Composable
+fun TransitionDemo() {
+    var boxState by remember { mutableStateOf(BoxPosition.Start) }
+    val screenWidth = LocalConfiguration.current.screenWidthDp.dp
+    val transition = updateTransition(targetState = boxState, label = "Color and Motion")
+
+    val animatedColor by transition.animateColor(
+        transitionSpec = {
+            tween(4000)
+        },
+        label = "Color animation"
+    ) { state ->
+        when (state) {
+            BoxPosition.Start -> Color.Red
+            BoxPosition.End -> Color.Magenta
+        }
+    }
+
+    val animatedOffset: Dp by transition.animateDp(
+        transitionSpec = {
+            tween(4000)
+        },
+        label = "Motion Animation"
+    ) { state ->
+        when (state) {
+            BoxPosition.Start -> 0.dp
+            BoxPosition.End -> screenWidth - 70.dp
+        }
+    }
+
+    Column(modifier = Modifier.fillMaxWidth()) {
+        Box(
+            modifier = Modifier
+                .offset(x = animatedOffset, y = 20.dp)
+                .size(70.dp)
+                .background(animatedColor)
+        )
+        Spacer(modifier = Modifier.height(50.dp))
+        Button(
+            onClick = {
+                boxState = when (boxState) {
+                    BoxPosition.Start -> BoxPosition.End
+                    BoxPosition.End -> BoxPosition.Start
+                }
+            },
+            modifier = Modifier
+                .padding(20.dp)
+                .align(Alignment.CenterHorizontally)
+        ) {
+            Text(text = "Start Animation")
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun TransitionDemoPreview() {
+    HelloComposeTheme {
+        TransitionDemo()
     }
 }
 
