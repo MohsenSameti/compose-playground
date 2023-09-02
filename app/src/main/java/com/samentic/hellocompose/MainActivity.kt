@@ -6,10 +6,13 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.animateColorAsState
+import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.LinearEasing
+import androidx.compose.animation.core.LinearOutSlowInEasing
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.animateFloatAsState
+import androidx.compose.animation.core.keyframes
 import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
@@ -143,7 +146,23 @@ fun MotionDemo() {
             BoxPosition.Start -> 0.dp
             BoxPosition.End -> screenWidth - boxSideLength
         },
-        animationSpec = spring(dampingRatio = 0.1f, stiffness = Spring.StiffnessHigh)
+        animationSpec = keyframes {
+            durationMillis = 1000
+            when(boxState) {
+                BoxPosition.End -> {
+                    20.dp.at(10).with(LinearEasing)
+                    100.dp.at(100).with(LinearEasing)
+                    110.dp.at(500).with(FastOutSlowInEasing)
+                    200.dp.at(700).with(LinearOutSlowInEasing)
+                }
+                BoxPosition.Start -> {
+                    200.dp.at(10).with(FastOutSlowInEasing)
+                    110.dp.at(100).with(LinearOutSlowInEasing)
+                    100.dp.at(500).with(LinearEasing)
+                    20.dp.at(700).with(LinearEasing)
+                }
+            }
+        }
     )
 
     Column(modifier = Modifier.fillMaxWidth()) {
