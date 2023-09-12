@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -39,7 +40,7 @@ fun TextCell(text: String, modifier: Modifier = Modifier) {
         fontWeight = FontWeight.Bold,
         textAlign = TextAlign.Center,
         modifier = Modifier
-            .padding(4.dp)
+            .padding(8.dp)
             .size(100.dp, 100.dp)
             .border(width = 4.dp, color = Color.Red)
             .then(modifier)
@@ -51,6 +52,7 @@ fun MainScreen() {
     Column(modifier = Modifier.size(width = 600.dp, height = 600.dp)) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.End,
             modifier = Modifier
                 .padding(4.dp)
                 .border(width = 2.dp, Color.Blue)
@@ -64,6 +66,7 @@ fun MainScreen() {
 
         Column(
             horizontalAlignment = Alignment.End,
+            verticalArrangement = Arrangement.Bottom,
             modifier = Modifier
                 .padding(4.dp)
                 .border(width = 2.dp, Color.Green)
