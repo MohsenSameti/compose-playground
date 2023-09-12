@@ -6,10 +6,13 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -45,28 +48,31 @@ fun TextCell(text: String, modifier: Modifier = Modifier) {
 
 @Composable
 fun MainScreen() {
-    Column {
-        Row {
-            Column {
-                TextCell("1")
-                TextCell("2")
-                TextCell("3")
-            }
-            Column {
-                TextCell("4")
-                TextCell("5")
-                TextCell("6")
-            }
-            Column {
-                TextCell("7")
-                TextCell("8")
-            }
+    Column(modifier = Modifier.size(width = 600.dp, height = 600.dp)) {
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            modifier = Modifier
+                .padding(4.dp)
+                .border(width = 2.dp, Color.Blue)
+                .weight(2f)
+                .fillMaxWidth()
+        ) {
+            TextCell("1")
+            TextCell("2")
+            TextCell("3")
         }
 
-        Row {
-            TextCell("9")
-            TextCell("10")
-            TextCell("11")
+        Column(
+            horizontalAlignment = Alignment.End,
+            modifier = Modifier
+                .padding(4.dp)
+                .border(width = 2.dp, Color.Green)
+                .weight(6f)
+                .fillMaxWidth()
+        ) {
+            TextCell("4")
+            TextCell("5")
+            TextCell("6")
         }
     }
 }
