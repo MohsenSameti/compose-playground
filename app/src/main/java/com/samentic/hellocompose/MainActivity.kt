@@ -65,8 +65,8 @@ fun MainScreen() {
         }
 
         Column(
-            horizontalAlignment = Alignment.End,
-            verticalArrangement = Arrangement.Bottom,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.SpaceAround,
             modifier = Modifier
                 .padding(4.dp)
                 .border(width = 2.dp, Color.Green)
