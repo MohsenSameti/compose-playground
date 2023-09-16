@@ -73,9 +73,9 @@ fun MainScreen() {
                 .weight(6f)
                 .fillMaxWidth()
         ) {
-            TextCell("4")
-            TextCell("5")
-            TextCell("6")
+            TextCell("4", modifier = Modifier.weight(0.2f, fill = true))
+            TextCell("5", modifier = Modifier.weight(0.3f, fill = true))
+            TextCell("6", modifier = Modifier.weight(0.4f, fill = true))
         }
     }
 }
