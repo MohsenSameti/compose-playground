@@ -56,12 +56,12 @@ fun MainScreen() {
             modifier = Modifier
                 .padding(4.dp)
                 .border(width = 2.dp, Color.Blue)
-                .weight(2f)
+                .weight(2.5f)
                 .fillMaxWidth()
         ) {
-            TextCell("1")
-            TextCell("2")
-            TextCell("3")
+            TextCell("1", modifier = Modifier.align(Alignment.Top))
+            TextCell("2", modifier = Modifier.align(Alignment.CenterVertically))
+            TextCell("3", modifier = Modifier.align(Alignment.Bottom))
         }
 
         Column(
