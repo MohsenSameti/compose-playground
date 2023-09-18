@@ -3,16 +3,22 @@ package com.samentic.hellocompose
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.CutCornerShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -52,7 +58,10 @@ fun TextCell(
 
 @Composable
 fun MainScreen() {
-    Column {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.padding(12.dp)
+    ) {
         Box(
             contentAlignment = Alignment.CenterEnd,
             modifier = Modifier.size(400.dp, 400.dp)
@@ -84,6 +93,24 @@ fun MainScreen() {
             Text("BottomCenter", Modifier.align(Alignment.BottomCenter))
             Text("BottomEnd", Modifier.align(Alignment.BottomEnd))
         }
+        Spacer(modifier = Modifier.size(12.dp))
+
+//        Box(modifier = Modifier
+//            .size(200.dp)
+//            .clip(CircleShape)
+//            .background(Color.Blue))
+//        Box(
+//            modifier = Modifier
+//                .size(200.dp)
+//                .clip(RoundedCornerShape(30.dp))
+//                .background(Color.Blue)
+//        )
+        Box(
+            modifier = Modifier
+                .size(200.dp)
+                .clip(CutCornerShape(30.dp))
+                .background(Color.Blue)
+        )
     }
 }
 
