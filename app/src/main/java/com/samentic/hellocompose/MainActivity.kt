@@ -7,6 +7,7 @@ import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -33,16 +34,18 @@ fun TextCell(
     modifier: Modifier = Modifier,
     fontSize: Int = 150
 ) {
-    Text(
-        text = text,
-        fontSize = fontSize.sp,
-        fontWeight = FontWeight.Bold,
-        textAlign = TextAlign.Center,
-        modifier = Modifier
-            .padding(8.dp)
-            .border(width = 4.dp, color = Color.Red)
-            .then(modifier)
-    )
+    Surface {
+        Text(
+            text = text,
+            fontSize = fontSize.sp,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center,
+            modifier = Modifier
+                .padding(8.dp)
+                .border(width = 4.dp, color = Color.Red)
+                .then(modifier)
+        )
+    }
 }
 
 @Composable
