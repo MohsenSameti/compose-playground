@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Surface
@@ -51,16 +52,38 @@ fun TextCell(
 
 @Composable
 fun MainScreen() {
-    Box(
-        contentAlignment = Alignment.CenterEnd,
-        modifier = Modifier.size(400.dp, 400.dp)
-    ) {
-        val height = 200.dp
-        val width = 200.dp
+    Column {
+        Box(
+            contentAlignment = Alignment.CenterEnd,
+            modifier = Modifier.size(400.dp, 400.dp)
+        ) {
+            val height = 200.dp
+            val width = 200.dp
 
-        TextCell("1", Modifier.size(width = width, height = height))
-        TextCell("2", Modifier.size(width = width, height = height))
-        TextCell("3", Modifier.size(width = width, height = height))
+            TextCell("1", Modifier.size(width = width, height = height))
+            TextCell("2", Modifier.size(width = width, height = height))
+            TextCell("3", Modifier.size(width = width, height = height))
+        }
+        Box(
+            contentAlignment = Alignment.CenterEnd,
+            modifier = Modifier
+                .size(290.dp, 90.dp)
+                .border(4.dp, Color.Green)
+                .padding(8.dp)
+        ) {
+
+            Text("TopStart", Modifier.align(Alignment.TopStart))
+            Text("TopCenter", Modifier.align(Alignment.TopCenter))
+            Text("TopEnd", Modifier.align(Alignment.TopEnd))
+
+            Text("CenterStart", Modifier.align(Alignment.CenterStart))
+            Text("Center", Modifier.align(Alignment.Center))
+            Text("CenterEnd", Modifier.align(Alignment.CenterEnd))
+
+            Text("BottomStart", Modifier.align(Alignment.BottomStart))
+            Text("BottomCenter", Modifier.align(Alignment.BottomCenter))
+            Text("BottomEnd", Modifier.align(Alignment.BottomEnd))
+        }
     }
 }
 
